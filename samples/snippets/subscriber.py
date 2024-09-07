@@ -1170,7 +1170,7 @@ if __name__ == "__main__":  # noqa
     create_push_parser.add_argument("subscription_id")
     create_push_parser.add_argument("endpoint")
     create_push_parser.add_argument("ack_deadline_seconds", type=int) 
-)
+
 
     create_push_no_wrapper_parser = subparsers.add_parser(
         "create-push-no-wrapper", help=create_push_no_wrapper_subscription.__doc__
