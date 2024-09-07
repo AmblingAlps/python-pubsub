@@ -232,7 +232,7 @@ def create_subscription_with_dead_letter_topic(
 
 
 def create_push_subscription(
-    project_id: str, topic_id: str, subscription_id: str, endpoint: str
+    project_id: str, topic_id: str, subscription_id: str, endpoint: str, ack_deadline_seconds: int = 60
 ) -> None:
     """Create a new push subscription on the given topic."""
     # [START pubsub_create_push_subscription]
@@ -259,6 +259,7 @@ def create_push_subscription(
                 "name": subscription_path,
                 "topic": topic_path,
                 "push_config": push_config,
+                "ack_deadline_seconds": ack_deadline_seconds
             }
         )
 
