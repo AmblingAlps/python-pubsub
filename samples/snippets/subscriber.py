@@ -68,7 +68,7 @@ def list_subscriptions_in_project(project_id: str) -> None:
     # [END pubsub_list_subscriptions]
 
 
-def create_subscription(project_id: str, topic_id: str, subscription_id: str) -> None:
+def create_subscription(project_id: str, topic_id: str, subscription_id: str, ack_deadline_seconds: int = 60) -> None:
     """Create a new pull subscription on the given topic."""
     # [START pubsub_create_pull_subscription]
     from google.cloud import pubsub_v1
@@ -87,7 +87,7 @@ def create_subscription(project_id: str, topic_id: str, subscription_id: str) ->
     # close the underlying gRPC channel when done.
     with subscriber:
         subscription = subscriber.create_subscription(
-            request={"name": subscription_path, "topic": topic_path}
+            request={"name": subscription_path, "topic": topic_path, "ack_deadline_seconds": ack_deadline_seconds}
         )
 
     print(f"Subscription created: {subscription}")
