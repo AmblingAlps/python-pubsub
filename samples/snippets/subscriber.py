@@ -1169,7 +1169,8 @@ if __name__ == "__main__":  # noqa
     create_push_parser.add_argument("topic_id")
     create_push_parser.add_argument("subscription_id")
     create_push_parser.add_argument("endpoint")
-    create_push_parser.add_argument("ack_deadline_seconds")
+    create_push_parser.add_argument("ack_deadline_seconds", type=int) 
+)
 
     create_push_no_wrapper_parser = subparsers.add_parser(
         "create-push-no-wrapper", help=create_push_no_wrapper_subscription.__doc__
@@ -1348,7 +1349,7 @@ if __name__ == "__main__":  # noqa
         )
     elif args.command == "create-push":
         create_push_subscription(
-            args.project_id, args.topic_id, args.subscription_id, args.endpoint
+            args.project_id, args.topic_id, args.subscription_id, args.endpoint, args.ack_deadline_seconds
         )
     elif args.command == "create-push-no-wrapper":
         create_push_no_wrapper_subscription(
