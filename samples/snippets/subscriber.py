@@ -68,7 +68,7 @@ def list_subscriptions_in_project(project_id: str) -> None:
     # [END pubsub_list_subscriptions]
 
 
-def create_subscription(project_id: str, topic_id: str, subscription_id: str, ack_deadline_seconds: int = 60) -> None:
+def create_subscription(project_id: str, topic_id: str, subscription_id: str) -> None:
     """Create a new pull subscription on the given topic."""
     # [START pubsub_create_pull_subscription]
     from google.cloud import pubsub_v1
@@ -87,7 +87,7 @@ def create_subscription(project_id: str, topic_id: str, subscription_id: str, ac
     # close the underlying gRPC channel when done.
     with subscriber:
         subscription = subscriber.create_subscription(
-            request={"name": subscription_path, "topic": topic_path, "ack_deadline_seconds": ack_deadline_seconds}
+            request={"name": subscription_path, "topic": topic_path}
         )
 
     print(f"Subscription created: {subscription}")
@@ -1169,6 +1169,7 @@ if __name__ == "__main__":  # noqa
     create_push_parser.add_argument("topic_id")
     create_push_parser.add_argument("subscription_id")
     create_push_parser.add_argument("endpoint")
+    create_push_parser.add_argument("ack_deadline_seconds")
 
     create_push_no_wrapper_parser = subparsers.add_parser(
         "create-push-no-wrapper", help=create_push_no_wrapper_subscription.__doc__
